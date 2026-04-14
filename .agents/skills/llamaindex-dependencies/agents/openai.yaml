@@ -1,0 +1,4 @@
+interface:
+  display_name: "LlamaIndex Dependencies"
+  short_description: "Package, install, and version guidance"
+  default_prompt: "Use $llamaindex-dependencies to choose the right LlamaIndex packages and setup."

@@ -1,0 +1,4 @@
+interface:
+  display_name: "LlamaIndex Fundamentals"
+  short_description: "Core LlamaIndex building blocks and APIs"
+  default_prompt: "Use $llamaindex-fundamentals to build a LlamaIndex app from core primitives."

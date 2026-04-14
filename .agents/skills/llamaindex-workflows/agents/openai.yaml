@@ -1,0 +1,4 @@
+interface:
+  display_name: "LlamaIndex Workflows"
+  short_description: "Event-driven workflows, loops, and concurrency"
+  default_prompt: "Use $llamaindex-workflows to implement event-driven LlamaIndex workflows."

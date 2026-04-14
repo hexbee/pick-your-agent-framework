@@ -1,0 +1,4 @@
+interface:
+  display_name: "LlamaIndex Selection"
+  short_description: "Choose the right LlamaIndex skill path"
+  default_prompt: "Use $llamaindex-selection to choose the right LlamaIndex skill or architecture path."

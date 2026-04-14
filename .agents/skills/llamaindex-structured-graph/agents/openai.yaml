@@ -1,0 +1,4 @@
+interface:
+  display_name: "LlamaIndex Structured and Graph"
+  short_description: "Structured extraction and graph-based retrieval"
+  default_prompt: "Use $llamaindex-structured-graph for structured output, extraction, or PropertyGraphIndex work."

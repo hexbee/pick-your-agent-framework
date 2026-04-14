@@ -1,0 +1,4 @@
+interface:
+  display_name: "LlamaIndex Cloud and MCP"
+  short_description: "LlamaCloud, LlamaParse, and MCP integration"
+  default_prompt: "Use $llamaindex-cloud-mcp for LlamaParse, LlamaCloud, or MCP integration tasks."

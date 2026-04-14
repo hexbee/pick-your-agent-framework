@@ -1,0 +1,4 @@
+interface:
+  display_name: "LlamaIndex Observability"
+  short_description: "Tracing, evaluation, cost, and debugging help"
+  default_prompt: "Use $llamaindex-observability to instrument, evaluate, or debug a LlamaIndex app."

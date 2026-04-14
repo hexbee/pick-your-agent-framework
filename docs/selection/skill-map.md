@@ -1,0 +1,50 @@
+# Skill Map
+
+[English](./skill-map.md) | [简体中文](./skill-map.zh-CN.md)
+
+This document is the current inventory of framework-related Codex skills in this repository.
+
+Use it as the canonical place to update the skill list when new framework families or sub-skills are added.
+
+## Selection
+
+- `framework-selection`
+- `llamaindex-selection`
+
+## LangChain
+
+- `langchain-dependencies`
+- `langchain-fundamentals`
+- `langchain-middleware`
+- `langchain-rag`
+
+## LangGraph
+
+- `langgraph-fundamentals`
+- `langgraph-human-in-the-loop`
+- `langgraph-persistence`
+
+## Deep Agents
+
+- `deep-agents-core`
+- `deep-agents-memory`
+- `deep-agents-orchestration`
+
+## LlamaIndex
+
+- `llamaindex-dependencies`
+- `llamaindex-fundamentals`
+- `llamaindex-rag`
+- `llamaindex-agents`
+- `llamaindex-workflows`
+- `llamaindex-structured-graph`
+- `llamaindex-observability`
+- `llamaindex-cloud-mcp`
+
+## Update Rule
+
+When adding a new framework family or sub-skill:
+
+1. update this file
+2. update `skill-map.zh-CN.md`
+3. update the README only if the top-level grouping changes

@@ -1,0 +1,4 @@
+interface:
+  display_name: "LlamaIndex RAG"
+  short_description: "Loading, indexing, retrieval, and synthesis"
+  default_prompt: "Use $llamaindex-rag to build or customize a LlamaIndex RAG pipeline."

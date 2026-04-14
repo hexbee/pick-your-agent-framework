@@ -1,0 +1,4 @@
+interface:
+  display_name: "LlamaIndex Agents"
+  short_description: "Agent patterns, tools, state, and output"
+  default_prompt: "Use $llamaindex-agents to build LlamaIndex agents and agent tools."
