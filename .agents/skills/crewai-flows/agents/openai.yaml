@@ -1,0 +1,4 @@
+interface:
+  display_name: "CrewAI Flows"
+  short_description: "Flow-first architecture, state, and routing"
+  default_prompt: "Use $crewai-flows to build a CrewAI app around Flow, state, and branching."

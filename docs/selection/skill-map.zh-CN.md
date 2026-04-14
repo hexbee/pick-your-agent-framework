@@ -10,6 +10,7 @@
 
 - `framework-selection`
 - `llamaindex-selection`
+- `crewai-selection`
 
 ## LangChain
 
@@ -29,6 +30,13 @@
 - `deep-agents-core`
 - `deep-agents-memory`
 - `deep-agents-orchestration`
+
+## CrewAI
+
+- `crewai-fundamentals`
+- `crewai-flows`
+- `crewai-tools-mcp`
+- `crewai-memory-knowledge`
 
 ## LlamaIndex
 

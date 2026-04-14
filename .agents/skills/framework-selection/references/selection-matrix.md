@@ -7,6 +7,7 @@ Use this file when a request could reasonably fit more than one framework.
 Pick the framework for the hardest part of the system right now:
 
 - choose **LangChain** when the task is mostly model calls, prompt composition, tools, or a simple agent loop
+- choose **CrewAI** when the task is mostly flow-first automation, role-based agent teamwork, and bounded crews inside a broader Python workflow
 - choose **LangGraph** when the task is mostly orchestration, branching, loops, or state transitions
 - choose **Deep Agents** when the task is mostly long-running execution, planning, files, memory, and delegation
 - choose **LlamaIndex** when the task is mostly retrieval, indexing, document parsing, data access, or graph/data-centric querying
@@ -16,11 +17,13 @@ Pick the framework for the hardest part of the system right now:
 | Request shape | Start here | Then |
 |---------------|------------|------|
 | "Build a simple assistant with tools" | `LangChain` | add `LangGraph` only if control flow grows |
+| "Build a flow-first business automation with role-based agents" | `CrewAI` | use `crewai-flows`, then add crews for complex steps |
 | "Build a retrying or branching agent" | `LangGraph` | add `LangChain` primitives inside nodes |
 | "Build a long-running coding/research worker" | `Deep Agents` | add `LangGraph` for precise subflows if needed |
 | "Build a chatbot over private docs" | `LlamaIndex` | use `llamaindex-rag`, then add agents only if needed |
 | "Build a research agent over a document corpus" | `LlamaIndex` | `llamaindex-rag` -> `llamaindex-agents` |
 | "Build a durable agent with strong private-data retrieval" | `Deep Agents` | use LlamaIndex as the retrieval layer |
+| "Build an automation that invokes agent teams and external tools" | `CrewAI` | add `crewai-tools-mcp` and `crewai-memory-knowledge` as needed |
 | "Build a workflow over parsed PDFs and extracted entities" | `LlamaIndex` | `llamaindex-cloud-mcp` -> `llamaindex-structured-graph` -> `llamaindex-workflows` if orchestration grows |
 
 ## Combination Rules
@@ -53,11 +56,21 @@ Good fit:
 - long-running research assistants over enterprise knowledge bases
 - coding agents that must query product docs or internal document stores
 
+### CrewAI + LlamaIndex
+
+Use this when CrewAI should remain the application and workflow shell, but private-data retrieval or document grounding needs a stronger specialized layer.
+
+Good fit:
+
+- support or ops flows grounded in internal documents
+- research automations where a crew should query a separate retrieval system
+
 ## Escalation Rule
 
 Start with one primary framework. Add a second only when a real boundary appears:
 
 - retrieval is weak -> add `LlamaIndex`
+- workflow should be flow-first and role-based -> add `CrewAI`
 - orchestration is messy -> add `LangGraph`
 - task scope is open-ended and long-running -> add `Deep Agents`
 - app logic is still simple -> stay in `LangChain`

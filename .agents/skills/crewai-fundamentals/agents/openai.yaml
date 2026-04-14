@@ -1,0 +1,4 @@
+interface:
+  display_name: "CrewAI Fundamentals"
+  short_description: "Core CrewAI objects, setup, and first crew"
+  default_prompt: "Use $crewai-fundamentals to build or explain a basic CrewAI project."

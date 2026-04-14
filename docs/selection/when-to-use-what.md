@@ -11,6 +11,7 @@ Use it when you know roughly what you want to build, but you are not yet sure wh
 | If the hardest part is... | Start here |
 |---------------------------|------------|
 | model and tool composition | LangChain |
+| flow-first business automation with role-based agents | CrewAI |
 | orchestration, loops, and state | LangGraph |
 | long-running execution, planning, files, delegation | Deep Agents |
 | retrieval, indexing, parsing, private-data access | LlamaIndex |
@@ -22,6 +23,13 @@ Use it when you know roughly what you want to build, but you are not yet sure wh
 - you want a simple assistant or agent
 - you mostly need models, prompts, and tools
 - you do not yet need custom graph orchestration
+
+### Use CrewAI when
+
+- the application should be organized around flows and crews
+- role-based agents and explicit tasks are part of the design
+- you want a production-friendly Python framework for automations
+- agent collaboration should sit inside a broader workflow
 
 ### Use LangGraph when
 
@@ -47,6 +55,10 @@ Use it when you know roughly what you want to build, but you are not yet sure wh
 
 Use this when custom orchestration sits on top of a strong retrieval layer.
 
+### CrewAI + LlamaIndex
+
+Use this when CrewAI is the application shell, but document retrieval or private-data grounding deserves a stronger dedicated data layer.
+
 ### Deep Agents + LlamaIndex
 
 Use this when a long-running agent system needs a serious private-data backend.
@@ -58,6 +70,8 @@ Use this when the app shell is simple, but retrieval still deserves a dedicated 
 ## Common Mis-Selections
 
 - choosing LangChain when the real problem is document retrieval quality
+- choosing CrewAI when one simple tool-calling agent would be enough
+- choosing LangGraph when CrewAI's flow model would already cover the workflow cleanly
 - choosing LlamaIndex when the app barely has a data layer
 - choosing LangGraph too early for a problem that could stay simple
 - choosing Deep Agents for a task that is not actually long-running or open-ended
@@ -65,6 +79,7 @@ Use this when the app shell is simple, but retrieval still deserves a dedicated 
 ## Suggested Reading Order
 
 - Read [LangChain](../frameworks/langchain.md)
+- Read [CrewAI](../frameworks/crewai.md)
 - Read [LangGraph](../frameworks/langgraph.md)
 - Read [Deep Agents](../frameworks/deep-agents.md)
 - Read [LlamaIndex](../frameworks/llamaindex.md)
@@ -80,3 +95,7 @@ For the current skill-based routing logic, start here:
 If the first answer is LlamaIndex, continue here:
 
 - [llamaindex-selection](../../.agents/skills/llamaindex-selection/SKILL.md)
+
+If the first answer is CrewAI, continue here:
+
+- [crewai-selection](../../.agents/skills/crewai-selection/SKILL.md)

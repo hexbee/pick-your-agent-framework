@@ -1,0 +1,4 @@
+interface:
+  display_name: "CrewAI Memory and Knowledge"
+  short_description: "Grounding, recall, and reusable context"
+  default_prompt: "Use $crewai-memory-knowledge for CrewAI memory, recall, or knowledge-source design."

@@ -10,6 +10,7 @@ Use it as the canonical place to update the skill list when new framework famili
 
 - `framework-selection`
 - `llamaindex-selection`
+- `crewai-selection`
 
 ## LangChain
 
@@ -29,6 +30,13 @@ Use it as the canonical place to update the skill list when new framework famili
 - `deep-agents-core`
 - `deep-agents-memory`
 - `deep-agents-orchestration`
+
+## CrewAI
+
+- `crewai-fundamentals`
+- `crewai-flows`
+- `crewai-tools-mcp`
+- `crewai-memory-knowledge`
 
 ## LlamaIndex
 

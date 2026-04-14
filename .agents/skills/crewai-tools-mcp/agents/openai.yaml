@@ -1,0 +1,4 @@
+interface:
+  display_name: "CrewAI Tools and MCP"
+  short_description: "Tools, crewai_tools, and MCP integration"
+  default_prompt: "Use $crewai-tools-mcp to connect a CrewAI agent to tools or MCP servers."

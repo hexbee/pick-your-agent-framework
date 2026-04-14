@@ -1,0 +1,4 @@
+interface:
+  display_name: "CrewAI Selection"
+  short_description: "Choose the right CrewAI skill path"
+  default_prompt: "Use $crewai-selection to choose the right CrewAI skill or architecture path."

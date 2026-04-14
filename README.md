@@ -31,6 +31,7 @@ The repository currently covers these framework families:
 | Framework | Best fit |
 |-----------|----------|
 | LangChain | model calls, tools, chains, simple agents, general building blocks |
+| CrewAI | flow-first automations, role-based agent teams, tasks/processes, production workflows |
 | LangGraph | explicit orchestration, branching, loops, persistence, human-in-the-loop |
 | Deep Agents | long-running agent systems with planning, files, delegation, and memory |
 | LlamaIndex | RAG, indexing, document intelligence, graph/data retrieval, data-centric agents |
@@ -44,6 +45,7 @@ Start with this rough rule of thumb:
 | If the hardest part is... | Start here |
 |---------------------------|------------|
 | model/tool composition | LangChain |
+| flow-first automation with role-based agents | CrewAI |
 | orchestration and state transitions | LangGraph |
 | long-running execution with planning and files | Deep Agents |
 | retrieval, indexing, parsing, or private-data QA | LlamaIndex |
@@ -56,6 +58,10 @@ For the current top-level routing logic, see:
 If the answer is "LlamaIndex", the next layer of routing lives here:
 
 - [llamaindex-selection](./.agents/skills/llamaindex-selection/SKILL.md)
+
+If the answer is "CrewAI", the next layer of routing lives here:
+
+- [crewai-selection](./.agents/skills/crewai-selection/SKILL.md)
 
 ## What You Will Find Here
 
@@ -73,6 +79,7 @@ It is already useful as a skill library today, and it is being shaped to become 
 The skill suite is grouped into:
 
 - top-level selection skills
+- CrewAI skills
 - LangChain skills
 - LangGraph skills
 - Deep Agents skills
@@ -92,6 +99,7 @@ The repository is structured to separate reusable skills from future written doc
 ├── .agents/
 │   └── skills/
 │       ├── framework-selection/
+│       ├── crewai-*/
 │       ├── langchain-*/
 │       ├── langgraph-*/
 │       ├── deep-agents-*/
@@ -122,7 +130,7 @@ This repository is intentionally leaving room for:
 - more selection heuristics for real-world scenarios
 - more framework-specific skill suites
 
-Likely future additions could include frameworks such as CrewAI, AutoGen, or PydanticAI, but the structure is meant to support any framework that deserves a serious introduction and comparison path.
+Likely future additions could include frameworks such as AutoGen or PydanticAI, but the structure is meant to support any framework that deserves a serious introduction and comparison path.
 
 ## How to Extend It
 
