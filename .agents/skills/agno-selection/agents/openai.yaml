@@ -1,0 +1,4 @@
+interface:
+  display_name: "Agno Selection"
+  short_description: "Route Agno requests to the right sub-skill"
+  default_prompt: "Use $agno-selection to decide which Agno skill fits the task."

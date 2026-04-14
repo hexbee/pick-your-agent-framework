@@ -11,6 +11,7 @@ Pick the framework for the hardest part of the system right now:
 - choose **LangGraph** when the task is mostly orchestration, branching, loops, or state transitions
 - choose **Deep Agents** when the task is mostly long-running execution, planning, files, memory, and delegation
 - choose **LlamaIndex** when the task is mostly retrieval, indexing, document parsing, data access, or graph/data-centric querying
+- choose **Agno** when the task is mostly building an integrated agent system that may need teams, workflows, persistence, and runtime operations in one stack
 
 ## Typical Routes
 
@@ -21,9 +22,11 @@ Pick the framework for the hardest part of the system right now:
 | "Build a retrying or branching agent" | `LangGraph` | add `LangChain` primitives inside nodes |
 | "Build a long-running coding/research worker" | `Deep Agents` | add `LangGraph` for precise subflows if needed |
 | "Build a chatbot over private docs" | `LlamaIndex` | use `llamaindex-rag`, then add agents only if needed |
+| "Build an agent app that should scale into a managed runtime" | `Agno` | use `agno-fundamentals` -> `agno-agentos` as the system matures |
 | "Build a research agent over a document corpus" | `LlamaIndex` | `llamaindex-rag` -> `llamaindex-agents` |
 | "Build a durable agent with strong private-data retrieval" | `Deep Agents` | use LlamaIndex as the retrieval layer |
 | "Build an automation that invokes agent teams and external tools" | `CrewAI` | add `crewai-tools-mcp` and `crewai-memory-knowledge` as needed |
+| "Build one framework surface for agents, teams, and workflows" | `Agno` | add `agno-teams-workflows` and `agno-knowledge-memory` as needed |
 | "Build a workflow over parsed PDFs and extracted entities" | `LlamaIndex` | `llamaindex-cloud-mcp` -> `llamaindex-structured-graph` -> `llamaindex-workflows` if orchestration grows |
 
 ## Combination Rules
@@ -65,12 +68,22 @@ Good fit:
 - support or ops flows grounded in internal documents
 - research automations where a crew should query a separate retrieval system
 
+### Agno + LlamaIndex
+
+Use this when Agno should remain the integrated application and runtime shell, but retrieval and data access deserve a stronger specialized backend.
+
+Good fit:
+
+- managed agent systems grounded in large document sets
+- AgentOS applications whose real data challenge is retrieval quality
+
 ## Escalation Rule
 
 Start with one primary framework. Add a second only when a real boundary appears:
 
 - retrieval is weak -> add `LlamaIndex`
 - workflow should be flow-first and role-based -> add `CrewAI`
+- app should unify build and runtime concerns -> add `Agno`
 - orchestration is messy -> add `LangGraph`
 - task scope is open-ended and long-running -> add `Deep Agents`
 - app logic is still simple -> stay in `LangChain`

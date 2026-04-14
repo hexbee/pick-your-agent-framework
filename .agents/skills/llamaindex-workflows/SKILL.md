@@ -47,6 +47,7 @@ They are a better fit than a simple agent loop when orchestration is the hard pa
 
 <ex-basic-workflow>
 <python>
+
 Define a two-step workflow with typed intermediate state.
 ```python
 from llama_index.core.workflow import Workflow, Event, StartEvent, StopEvent, step
@@ -63,6 +64,7 @@ class JokeFlow(Workflow):
     async def finalize(self, ev: JokeEvent) -> StopEvent:
         return StopEvent(result=ev.joke)
 ```
+
 </python>
 </ex-basic-workflow>
 

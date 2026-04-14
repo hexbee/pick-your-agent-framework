@@ -31,6 +31,7 @@ Use structured outputs when downstream code should parse the result deterministi
 
 <ex-structured-llm>
 <python>
+
 Ask an LLM to return a typed object instead of raw prose.
 ```python
 from pydantic import BaseModel
@@ -44,6 +45,7 @@ sllm = llm.as_structured_llm(CompanySummary)
 response = await sllm.achat("Summarize the company and list key risks.")
 summary = response.raw
 ```
+
 </python>
 </ex-structured-llm>
 

@@ -9,8 +9,16 @@ Use it as the canonical place to update the skill list when new framework famili
 ## Selection
 
 - `framework-selection`
+- `agno-selection`
 - `llamaindex-selection`
 - `crewai-selection`
+
+## Agno
+
+- `agno-fundamentals`
+- `agno-teams-workflows`
+- `agno-knowledge-memory`
+- `agno-agentos`
 
 ## LangChain
 

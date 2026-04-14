@@ -31,6 +31,7 @@ The repository currently covers these framework families:
 | Framework | Best fit |
 |-----------|----------|
 | LangChain | model calls, tools, chains, simple agents, general building blocks |
+| Agno | integrated agents, teams, workflows, memory/knowledge, and runtime operations |
 | CrewAI | flow-first automations, role-based agent teams, tasks/processes, production workflows |
 | LangGraph | explicit orchestration, branching, loops, persistence, human-in-the-loop |
 | Deep Agents | long-running agent systems with planning, files, delegation, and memory |
@@ -45,6 +46,7 @@ Start with this rough rule of thumb:
 | If the hardest part is... | Start here |
 |---------------------------|------------|
 | model/tool composition | LangChain |
+| one integrated agent/runtime stack | Agno |
 | flow-first automation with role-based agents | CrewAI |
 | orchestration and state transitions | LangGraph |
 | long-running execution with planning and files | Deep Agents |
@@ -63,6 +65,10 @@ If the answer is "CrewAI", the next layer of routing lives here:
 
 - [crewai-selection](./.agents/skills/crewai-selection/SKILL.md)
 
+If the answer is "Agno", the next layer of routing lives here:
+
+- [agno-selection](./.agents/skills/agno-selection/SKILL.md)
+
 ## What You Will Find Here
 
 This repository currently contains:
@@ -79,6 +85,7 @@ It is already useful as a skill library today, and it is being shaped to become 
 The skill suite is grouped into:
 
 - top-level selection skills
+- Agno skills
 - CrewAI skills
 - LangChain skills
 - LangGraph skills
@@ -99,6 +106,7 @@ The repository is structured to separate reusable skills from future written doc
 ├── .agents/
 │   └── skills/
 │       ├── framework-selection/
+│       ├── agno-*/
 │       ├── crewai-*/
 │       ├── langchain-*/
 │       ├── langgraph-*/

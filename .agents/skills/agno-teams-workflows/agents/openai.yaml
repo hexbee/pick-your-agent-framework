@@ -1,0 +1,4 @@
+interface:
+  display_name: "Agno Teams And Workflows"
+  short_description: "Multi-agent coordination and staged execution in Agno"
+  default_prompt: "Use $agno-teams-workflows to build Agno teams or workflows."

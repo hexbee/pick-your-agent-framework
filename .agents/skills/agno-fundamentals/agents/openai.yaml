@@ -1,0 +1,4 @@
+interface:
+  display_name: "Agno Fundamentals"
+  short_description: "Core Agent setup, models, tools, and first patterns"
+  default_prompt: "Use $agno-fundamentals to build or explain a basic Agno project."

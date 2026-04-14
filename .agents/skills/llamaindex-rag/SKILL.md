@@ -36,6 +36,7 @@ Use readers for source-specific loading and `IngestionPipeline` for repeatable p
 
 <ex-ingestion-pipeline>
 <python>
+
 Split, enrich, and embed documents through an explicit ingestion pipeline.
 ```python
 from llama_index.core import VectorStoreIndex
@@ -55,6 +56,7 @@ pipeline = IngestionPipeline(
 nodes = pipeline.run(documents=documents)
 index = VectorStoreIndex(nodes)
 ```
+
 </python>
 </ex-ingestion-pipeline>
 
@@ -77,6 +79,7 @@ Use metadata extraction when filters, routing, or citation quality matter. Keep 
 
 <ex-custom-query-engine>
 <python>
+
 Build a custom query engine from explicit components.
 ```python
 from llama_index.core.retrievers import VectorIndexRetriever
@@ -91,6 +94,7 @@ query_engine = RetrieverQueryEngine(
     response_synthesizer=synthesizer,
 )
 ```
+
 </python>
 </ex-custom-query-engine>
 

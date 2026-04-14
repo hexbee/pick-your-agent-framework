@@ -31,6 +31,7 @@ Think of it as:
 ## Minimal Flow
 
 <python>
+
 ```python
 from pydantic import BaseModel
 from crewai.flow.flow import Flow, listen, start
@@ -58,6 +59,7 @@ flow = ReportFlow()
 flow.kickoff()
 print(flow.state.report)
 ```
+
 </python>
 
 ---
@@ -65,6 +67,7 @@ print(flow.state.report)
 ## Crew Inside a Flow
 
 <python>
+
 ```python
 from crewai import Agent, Crew, Task
 from crewai.flow.flow import Flow, listen, start
@@ -104,6 +107,7 @@ class ArticleFlow(Flow[ArticleState]):
         self.state.final_article = f"Final article based on:\n{research}"
         return self.state.final_article
 ```
+
 </python>
 
 ---

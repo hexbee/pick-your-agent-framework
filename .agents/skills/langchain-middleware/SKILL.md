@@ -19,6 +19,7 @@ Middleware patterns for production LangChain agents:
 
 <ex-basic-hitl-setup>
 <python>
+
 Set up an agent with HITL middleware that pauses before sending emails for approval.
 ```python
 from langchain.agents import create_agent
@@ -44,8 +45,10 @@ agent = create_agent(
     ],
 )
 ```
+
 </python>
 <typescript>
+
 Set up an agent with HITL that pauses before sending emails for human approval.
 ```typescript
 import { createAgent, humanInTheLoopMiddleware } from "langchain";
@@ -73,11 +76,13 @@ const agent = createAgent({
   ],
 });
 ```
+
 </typescript>
 </ex-basic-hitl-setup>
 
 <ex-running-with-interrupts>
 <python>
+
 Run the agent, detect an interrupt, then resume execution after human approval.
 ```python
 from langgraph.types import Command
@@ -99,8 +104,10 @@ result2 = agent.invoke(
     config=config
 )
 ```
+
 </python>
 <typescript>
+
 Run the agent, detect an interrupt, then resume execution after human approval.
 ```typescript
 import { Command } from "@langchain/langgraph";
@@ -123,11 +130,13 @@ const result2 = await agent.invoke(
   config
 );
 ```
+
 </typescript>
 </ex-running-with-interrupts>
 
 <ex-editing-tool-arguments>
 <python>
+
 Edit the tool arguments before approving when the original values need correction.
 ```python
 # Human edits the arguments — edited_action must include name + args
@@ -148,8 +157,10 @@ result2 = agent.invoke(
     config=config
 )
 ```
+
 </python>
 <typescript>
+
 Edit the tool arguments before approving when the original values need correction.
 ```typescript
 // Human edits the arguments — editedAction must include name + args
@@ -172,11 +183,13 @@ const result2 = await agent.invoke(
   config
 );
 ```
+
 </typescript>
 </ex-editing-tool-arguments>
 
 <ex-rejecting-with-feedback>
 <python>
+
 Reject a tool call and provide feedback explaining why it was rejected.
 ```python
 # Human rejects
@@ -190,11 +203,13 @@ result2 = agent.invoke(
     config=config
 )
 ```
+
 </python>
 </ex-rejecting-with-feedback>
 
 <ex-multiple-tools-different-policies>
 <python>
+
 Configure different HITL policies for each tool based on risk level.
 ```python
 agent = create_agent(
@@ -212,16 +227,19 @@ agent = create_agent(
     ],
 )
 ```
+
 </python>
 </ex-multiple-tools-different-policies>
 
 <boundaries>
+
 ### What You CAN Configure
 
 - Which tools require approval (per-tool policies)
 - Allowed decisions per tool (approve, edit, reject)
 - Custom middleware hooks: `before_model`, `after_model`, `wrap_tool_call`, `before_agent`, `after_agent`
 - Tool-specific middleware (apply only to certain tools)
+
 </boundaries>
 
 ---
@@ -235,6 +253,7 @@ Six decorator hooks are available. Two patterns:
 
 <ex-wrap-tool-call>
 <python>
+
 `@wrap_tool_call` intercepts tool execution. **Do NOT use `yield`** — it creates a generator and causes `NotImplementedError`.
 
 ```python
@@ -255,8 +274,10 @@ def guard_middleware(request, handler):
         return "This tool is disabled"  # short-circuit
     return handler(request)
 ```
+
 </python>
 <typescript>
+
 `createMiddleware({ wrapToolCall })` intercepts tool execution.
 
 ```typescript
@@ -271,11 +292,13 @@ const retryMiddleware = createMiddleware({
   },
 });
 ```
+
 </typescript>
 </ex-wrap-tool-call>
 
 <ex-before-after-hooks>
 <python>
+
 `before_model` / `after_model` / `before_agent` / `after_agent` all share `(state, runtime)` signature.
 
 ```python
@@ -289,8 +312,10 @@ def log_calls(state, runtime):
 def check_output(state, runtime):
     print(f"Model responded")
 ```
+
 </python>
 <typescript>
+
 All before/after hooks share the same `(state, runtime)` signature via `createMiddleware`.
 
 ```typescript
@@ -305,18 +330,22 @@ const loggingMiddleware = createMiddleware({
   },
 });
 ```
+
 </typescript>
 </ex-before-after-hooks>
 
 <boundaries>
+
 ### What You CANNOT Configure
 
 - Interrupt after tool execution (must be before)
 - Skip checkpointer requirement for HITL
+
 </boundaries>
 
 <fix-missing-checkpointer>
 <python>
+
 HITL middleware requires a checkpointer to persist state.
 ```python
 # WRONG
@@ -329,8 +358,10 @@ agent = create_agent(
     middleware=[HumanInTheLoopMiddleware({...})]
 )
 ```
+
 </python>
 <typescript>
+
 HITL requires a checkpointer to persist state.
 ```typescript
 // WRONG: No checkpointer
@@ -346,11 +377,13 @@ const agent = createAgent({
   middleware: [humanInTheLoopMiddleware({ interruptOn: { send_email: true } })],
 });
 ```
+
 </typescript>
 </fix-missing-checkpointer>
 
 <fix-no-thread-id>
 <python>
+
 Always provide thread_id when using HITL to track conversation state.
 ```python
 # WRONG
@@ -359,11 +392,13 @@ agent.invoke(input)  # No config!
 # CORRECT
 agent.invoke(input, config={"configurable": {"thread_id": "user-123"}})
 ```
+
 </python>
 </fix-no-thread-id>
 
 <fix-wrong-resume-syntax>
 <python>
+
 Use Command class to resume execution after an interrupt.
 ```python
 # WRONG
@@ -373,8 +408,10 @@ agent.invoke({"resume": {"decisions": [...]}})
 from langgraph.types import Command
 agent.invoke(Command(resume={"decisions": [{"type": "approve"}]}), config=config)
 ```
+
 </python>
 <typescript>
+
 Use Command class to resume execution after an interrupt.
 ```typescript
 // WRONG
@@ -384,5 +421,6 @@ await agent.invoke({ resume: { decisions: [...] } });
 import { Command } from "@langchain/langgraph";
 await agent.invoke(new Command({ resume: { decisions: [{ type: "approve" }] } }), config);
 ```
+
 </typescript>
 </fix-wrong-resume-syntax>

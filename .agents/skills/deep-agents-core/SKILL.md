@@ -42,6 +42,7 @@ The agent harness provides these capabilities automatically - you configure, not
 
 <ex-basic-agent>
 <python>
+
 Create a basic deep agent with a custom tool and invoke it with a user message.
 ```python
 from deepagents import create_deep_agent
@@ -63,8 +64,10 @@ result = agent.invoke({
     "messages": [{"role": "user", "content": "What's the weather in Tokyo?"}]
 }, config=config)
 ```
+
 </python>
 <typescript>
+
 Create a basic deep agent with a custom tool and invoke it with a user message.
 ```typescript
 import { createDeepAgent } from "deepagents";
@@ -87,11 +90,13 @@ const result = await agent.invoke({
   messages: [{ role: "user", content: "What's the weather in Tokyo?" }]
 }, config);
 ```
+
 </typescript>
 </ex-basic-agent>
 
 <ex-full-configuration>
 <python>
+
 Configure a deep agent with all available options including subagents, skills, and persistence.
 ```python
 from deepagents import create_deep_agent
@@ -112,8 +117,10 @@ agent = create_deep_agent(
     store=InMemoryStore()
 )
 ```
+
 </python>
 <typescript>
+
 Configure a deep agent with all available options including subagents, skills, and persistence.
 ```typescript
 import { createDeepAgent, FilesystemBackend } from "deepagents";
@@ -132,6 +139,7 @@ const agent = await createDeepAgent({
   store: new InMemoryStore()
 });
 ```
+
 </typescript>
 </ex-full-configuration>
 
@@ -192,6 +200,7 @@ Step-by-step guidance for the agent.
 
 <ex-skills-with-filesystem-backend>
 <python>
+
 Set up an agent with skills directory and filesystem backend for on-demand skill loading.
 ```python
 from deepagents import create_deep_agent
@@ -208,8 +217,10 @@ result = agent.invoke({
     "messages": [{"role": "user", "content": "Use the python-testing skill"}]
 }, config={"configurable": {"thread_id": "session-1"}})
 ```
+
 </python>
 <typescript>
+
 Set up an agent with skills directory and filesystem backend for on-demand skill loading.
 ```typescript
 import { createDeepAgent, FilesystemBackend } from "deepagents";
@@ -225,11 +236,13 @@ const result = await agent.invoke({
   messages: [{ role: "user", content: "Use the python-testing skill" }]
 }, { configurable: { thread_id: "session-1" } });
 ```
+
 </typescript>
 </ex-skills-with-filesystem-backend>
 
 <ex-skills-with-store-backend>
 <python>
+
 Load skill content into a Store backend for environments without filesystem access.
 ```python
 from deepagents import create_deep_agent
@@ -259,10 +272,12 @@ agent = create_deep_agent(
     skills=["/skills/"]
 )
 ```
+
 </python>
 </ex-skills-with-store-backend>
 
 <boundaries>
+
 ### What Agents CAN Configure
 
 - Model selection and parameters
@@ -277,10 +292,12 @@ agent = create_deep_agent(
 - Core middleware removal (TodoList, Filesystem, SubAgent always present)
 - The write_todos, task, or filesystem tool names
 - The SKILL.md frontmatter format
+
 </boundaries>
 
 <fix-checkpointer-for-interrupts>
 <python>
+
 Interrupts require a checkpointer.
 ```python
 # WRONG
@@ -289,8 +306,10 @@ agent = create_deep_agent(interrupt_on={"write_file": True})
 # CORRECT
 agent = create_deep_agent(interrupt_on={"write_file": True}, checkpointer=MemorySaver())
 ```
+
 </python>
 <typescript>
+
 Interrupts require a checkpointer.
 ```typescript
 // WRONG
@@ -299,11 +318,13 @@ const agent = await createDeepAgent({ interruptOn: { write_file: true } });
 // CORRECT
 const agent = await createDeepAgent({ interruptOn: { write_file: true }, checkpointer: new MemorySaver() });
 ```
+
 </typescript>
 </fix-checkpointer-for-interrupts>
 
 <fix-store-for-memory>
 <python>
+
 StoreBackend requires a Store instance for persistent memory across threads.
 ```python
 # WRONG
@@ -312,8 +333,10 @@ agent = create_deep_agent(backend=lambda rt: StoreBackend(rt))
 # CORRECT
 agent = create_deep_agent(backend=lambda rt: StoreBackend(rt), store=InMemoryStore())
 ```
+
 </python>
 <typescript>
+
 StoreBackend requires a Store instance for persistent memory across threads.
 ```typescript
 // WRONG
@@ -322,11 +345,13 @@ const agent = await createDeepAgent({ backend: (config) => new StoreBackend(conf
 // CORRECT
 const agent = await createDeepAgent({ backend: (config) => new StoreBackend(config), store: new InMemoryStore() });
 ```
+
 </typescript>
 </fix-store-for-memory>
 
 <fix-thread-id-for-conversations>
 <python>
+
 Use consistent thread_id to maintain conversation context across invocations.
 ```python
 # WRONG: Each invocation is isolated
@@ -338,8 +363,10 @@ config = {"configurable": {"thread_id": "user-123"}}
 agent.invoke({"messages": [...]}, config=config)
 agent.invoke({"messages": [...]}, config=config)
 ```
+
 </python>
 <typescript>
+
 Use consistent thread_id to maintain conversation context across invocations.
 ```typescript
 // WRONG: Each invocation is isolated
@@ -351,6 +378,7 @@ const config = { configurable: { thread_id: "user-123" } };
 await agent.invoke({ messages: [...] }, config);
 await agent.invoke({ messages: [...] }, config);
 ```
+
 </typescript>
 </fix-thread-id-for-conversations>
 
@@ -372,6 +400,7 @@ This is my skill...
 
 <fix-backend-for-skills>
 <python>
+
 Skills require a proper backend to load from the filesystem.
 ```python
 # WRONG: Skills won't load without proper backend
@@ -383,6 +412,7 @@ agent = create_deep_agent(
     skills=["./skills/"]
 )
 ```
+
 </python>
 </fix-backend-for-skills>
 
@@ -405,6 +435,7 @@ description: Python testing best practices with pytest fixtures, mocking, and as
 
 <fix-subagent-skills>
 <python>
+
 Skills are not inherited by subagents - provide them explicitly.
 ```python
 # WRONG: Custom subagents don't inherit skills
@@ -419,5 +450,6 @@ agent = create_deep_agent(
     subagents=[{"name": "helper", "skills": ["/helper-skills/"], ...}]
 )
 ```
+
 </python>
 </fix-subagent-skills>

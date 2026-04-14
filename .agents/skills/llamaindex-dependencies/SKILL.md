@@ -45,15 +45,18 @@ The umbrella package currently includes a starter bundle, not every integration.
 
 <ex-openai-starter>
 <python>
+
 Use the starter bundle when you want the shortest path to a local prototype.
 ```bash
 pip install llama-index
 ```
+
 </python>
 </ex-openai-starter>
 
 <ex-selective-install>
 <python>
+
 Install only the core runtime plus the exact providers you plan to use.
 ```bash
 pip install \
@@ -62,15 +65,18 @@ pip install \
   llama-index-llms-ollama \
   llama-index-embeddings-huggingface
 ```
+
 </python>
 </ex-selective-install>
 
 <ex-workflow-import>
 <python>
+
 Workflows can be imported from `llama_index.core.workflow` when you use `llama-index-core`.
 ```python
 from llama_index.core.workflow import Workflow, Event, StartEvent, StopEvent, step
 ```
+
 </python>
 </ex-workflow-import>
 

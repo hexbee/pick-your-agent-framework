@@ -28,6 +28,7 @@ Use regular tools when the capability is local and explicit. Use MCP when you wa
 ## Direct Tools
 
 <python>
+
 ```python
 from crewai import Agent
 from crewai_tools import SerperDevTool, FileReadTool
@@ -40,6 +41,7 @@ research_agent = Agent(
     verbose=True,
 )
 ```
+
 </python>
 
 ---
@@ -47,6 +49,7 @@ research_agent = Agent(
 ## MCP Quick Start
 
 <python>
+
 ```python
 from crewai import Agent
 
@@ -60,6 +63,7 @@ agent = Agent(
     ],
 )
 ```
+
 </python>
 
 ---
@@ -67,6 +71,7 @@ agent = Agent(
 ## Structured MCP Configuration
 
 <python>
+
 ```python
 from crewai import Agent
 from crewai.mcp import MCPServerHTTP, MCPServerStdio
@@ -94,6 +99,7 @@ agent = Agent(
     ],
 )
 ```
+
 </python>
 
 ---

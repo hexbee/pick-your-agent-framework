@@ -63,6 +63,7 @@ Use MCP when a LlamaIndex agent or workflow should consume external tools throug
 
 <ex-mcp-tools>
 <python>
+
 Load MCP tools into a LlamaIndex agent.
 ```python
 from llama_index.core.agent import FunctionAgent
@@ -78,6 +79,7 @@ agent = FunctionAgent(
     system_prompt="Use MCP tools when the answer depends on remote documentation or services.",
 )
 ```
+
 </python>
 </ex-mcp-tools>
 

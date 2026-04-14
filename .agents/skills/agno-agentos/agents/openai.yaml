@@ -1,0 +1,4 @@
+interface:
+  display_name: "Agno AgentOS"
+  short_description: "Runtime, serving, control plane, and production operations"
+  default_prompt: "Use $agno-agentos to build or explain Agno AgentOS runtimes."

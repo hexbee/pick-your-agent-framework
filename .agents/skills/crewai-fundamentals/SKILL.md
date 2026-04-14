@@ -40,6 +40,7 @@ Prefer CrewAI when you want role-based agents working through explicit tasks ins
 ## Minimal Crew
 
 <python>
+
 ```python
 from crewai import Agent, Task, Crew, Process
 
@@ -79,6 +80,7 @@ crew = Crew(
 result = crew.kickoff()
 print(result.raw)
 ```
+
 </python>
 
 ---
@@ -90,6 +92,7 @@ print(result.raw)
 - Enable planning when the crew should reason about task execution before acting.
 
 <python>
+
 ```python
 crew = Crew(
     agents=[researcher, writer],
@@ -99,6 +102,7 @@ crew = Crew(
     planning_llm="gpt-4o",
 )
 ```
+
 </python>
 
 ---

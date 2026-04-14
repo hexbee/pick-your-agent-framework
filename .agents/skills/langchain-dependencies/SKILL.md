@@ -152,6 +152,7 @@ These packages have tighter compatibility requirements — use the latest availa
 
 <ex-langgraph-python>
 <python>
+
 Minimal dependency set for a LangGraph project (provider-agnostic).
 ```
 # requirements.txt
@@ -165,11 +166,13 @@ langsmith>=0.3.0
 # langchain-anthropic
 # langchain-google-genai
 ```
+
 </python>
 </ex-langgraph-python>
 
 <ex-langgraph-typescript>
 <typescript>
+
 Minimal package.json dependencies for a LangGraph project (provider-agnostic).
 ```json
 {
@@ -181,11 +184,13 @@ Minimal package.json dependencies for a LangGraph project (provider-agnostic).
   }
 }
 ```
+
 </typescript>
 </ex-langgraph-typescript>
 
 <ex-deepagents-python>
 <python>
+
 Minimal dependency set for a Deep Agents project (provider-agnostic).
 ```
 # requirements.txt
@@ -198,11 +203,13 @@ langsmith>=0.3.0
 # langchain-anthropic
 # langchain-openai
 ```
+
 </python>
 </ex-deepagents-python>
 
 <ex-deepagents-typescript>
 <typescript>
+
 Minimal package.json dependencies for a Deep Agents project (provider-agnostic).
 ```json
 {
@@ -214,11 +221,13 @@ Minimal package.json dependencies for a Deep Agents project (provider-agnostic).
   }
 }
 ```
+
 </typescript>
 </ex-deepagents-typescript>
 
 <ex-with-tools-python>
 <python>
+
 Adding Tavily search and a vector store to a LangGraph project.
 ```
 # requirements.txt
@@ -241,11 +250,13 @@ langchain-text-splitters  # use latest; semver
 # Your model provider:
 # langchain-openai / langchain-anthropic / etc.
 ```
+
 </python>
 </ex-with-tools-python>
 
 <ex-with-tools-typescript>
 <typescript>
+
 Adding Tavily search and a vector store to a LangGraph project.
 ```json
 {
@@ -259,6 +270,7 @@ Adding Tavily search and a vector store to a LangGraph project.
   }
 }
 ```
+
 </typescript>
 </ex-with-tools-typescript>
 
@@ -377,6 +389,7 @@ Each entry shows the correct package and import path. If a dedicated package exi
 
 <fix-core-not-installed>
 <typescript>
+
 `@langchain/core` is a peer dependency — it must be in your package.json, especially in monorepos.
 ```json
 // WRONG: missing @langchain/core (breaks in yarn workspaces / strict hoisting)
@@ -394,26 +407,31 @@ Each entry shows the correct package and import path. If a dedicated package exi
   }
 }
 ```
+
 </typescript>
 </fix-core-not-installed>
 
 <fix-python-version>
 <python>
+
 Python 3.9 and below are not supported by LangChain 1.0.
 ```python
 # Verify before installing
 import sys
 assert sys.version_info >= (3, 10), "Python 3.10+ required for LangChain 1.0"
 ```
+
 </python>
 </fix-python-version>
 
 <fix-node-version>
 <typescript>
+
 Node.js below 20 is not officially supported.
 ```bash
 # Verify before installing
 node --version   # must be v20.x or higher
 ```
+
 </typescript>
 </fix-node-version>

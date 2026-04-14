@@ -1,0 +1,4 @@
+interface:
+  display_name: "Agno Knowledge And Memory"
+  short_description: "Knowledge bases, memory, sessions, and persistence"
+  default_prompt: "Use $agno-knowledge-memory for Agno grounding, memory, and session design."

@@ -1,10 +1,10 @@
 ---
 name: framework-selection
-description: "INVOKE THIS SKILL at the START of any LangChain, LangGraph, Deep Agents, CrewAI, or LlamaIndex project, before writing agent code. Determines which framework is the right starting point and routes to the correct next skill."
+description: "INVOKE THIS SKILL at the START of any LangChain, LangGraph, Deep Agents, CrewAI, LlamaIndex, or Agno project, before writing agent code. Determines which framework is the right starting point and routes to the correct next skill."
 ---
 
 <overview>
-LangChain, LangGraph, and Deep Agents are **layered**, while CrewAI and LlamaIndex are complementary frameworks with different centers of gravity:
+LangChain, LangGraph, and Deep Agents are **layered**, while CrewAI, LlamaIndex, and Agno are complementary frameworks with different centers of gravity:
 
 ```
 ┌─────────────────────────────────────────────┐
@@ -28,6 +28,12 @@ LangChain, LangGraph, and Deep Agents are **layered**, while CrewAI and LlamaInd
 │  (loading, indexing, retrieval, agents,    │
 │   workflows, parsing, graph/data systems)  │
 └─────────────────────────────────────────────┘
+
+┌─────────────────────────────────────────────┐
+│                    Agno                     │  ← integrated agent/runtime stack
+│ (agents, teams, workflows, knowledge,      │
+│  memory, sessions, AgentOS runtime)        │
+└─────────────────────────────────────────────┘
 ```
 
 Use this skill before selecting sub-skills or writing framework-specific code.
@@ -47,6 +53,7 @@ Answer these questions in order:
 |----------|-------|-------|
 | Does the task require breaking work into sub-tasks, managing files across a long session, persistent memory, or loading on-demand skills? | **Deep Agents** | ↓ |
 | Is the main problem building retrieval, indexing, document parsing, graph retrieval, or question-answering over private data? | **LlamaIndex** | ↓ |
+| Is the app best served by one integrated framework spanning agents, teams, workflows, persistence, and a runtime/control-plane layer? | **Agno** | ↓ |
 | Is the app best described as flow-first automation with role-based agents, explicit tasks, and crews inside a broader Python workflow? | **CrewAI** | ↓ |
 | Does the task require complex control flow such as loops, dynamic branching, parallel workers, human-in-the-loop, or custom state? | **LangGraph** | ↓ |
 | Is this a single-purpose agent that takes input, runs tools, and returns a result? | **LangChain** (`create_agent`) | ↓ |
@@ -87,6 +94,20 @@ Answer these questions in order:
 - the task is really retrieval-first rather than workflow-first
 
 **Skills to invoke next:** `crewai-selection`, then one of `crewai-fundamentals`, `crewai-flows`, `crewai-tools-mcp`, or `crewai-memory-knowledge`
+
+### Agno — Use when you want one framework to cover build and runtime concerns
+
+**Best for:**
+- integrated agent systems that may grow into teams and workflows
+- apps that need knowledge, memory, sessions, and runtime operations in one stack
+- production-oriented systems that benefit from a control plane and managed runtime
+
+**Not ideal when:**
+- one lightweight tool-calling agent would already solve the problem
+- you want low-level custom orchestration over every branch and state edge
+- the main problem is retrieval quality rather than integrated agent/runtime design
+
+**Skills to invoke next:** `agno-selection`, then one of `agno-fundamentals`, `agno-teams-workflows`, `agno-knowledge-memory`, or `agno-agentos`
 
 ### LangGraph — Use when you need to own the control flow
 
@@ -149,6 +170,17 @@ Answer these questions in order:
 
 When uncertain, invoke `crewai-selection` first and let it route within the CrewAI subtree.
 
+### If the answer is Agno
+
+| If the main Agno question is... | Go To |
+|---------------------------------|-------|
+| package setup, first agent, or baseline architecture | `agno-fundamentals` |
+| multi-agent coordination or staged execution | `agno-teams-workflows` |
+| knowledge bases, memory, sessions, or persistence | `agno-knowledge-memory` |
+| runtime serving, control plane, or operations | `agno-agentos` |
+
+When uncertain, invoke `agno-selection` first and let it route within the Agno subtree.
+
 ### If the answer is LlamaIndex
 
 | If the main LlamaIndex question is... | Go To |
@@ -176,6 +208,7 @@ These frameworks can be combined, but only after a primary framework has been ch
 | App shell is flow-first, but retrieval over private docs is the real data challenge | CrewAI + LlamaIndex |
 | Simple app shell, but retrieval still deserves a dedicated layer | LangChain + LlamaIndex |
 | Custom orchestration sits on top of a serious retrieval backend | LangGraph + LlamaIndex |
+| Integrated agent/runtime stack, but retrieval becomes the real hard backend | Agno + LlamaIndex |
 
 Start with one framework. Add a second only when a real boundary appears.
 
@@ -183,13 +216,13 @@ Start with one framework. Add a second only when a real boundary appears.
 
 ## Quick Reference
 
-| | LangChain | CrewAI | LangGraph | Deep Agents | LlamaIndex |
-|---|-----------|--------|-----------|-------------|------------|
-| **Primary strength** | Models, tools, chains | Flow-first automations | Orchestration and state | Long-running agent systems | Retrieval and data systems |
-| **Control flow** | Fixed tool loop | Managed by flows | Custom graph | Managed by middleware | Moderate; retrieval-first plus agents/workflows |
-| **Built-in collaboration model** | Light | Crews and tasks | Manual | Subagents | Agent/workflow patterns |
-| **Planning** | ✗ | Optional crew planning | Manual | ✓ Built in | Limited; use workflows/agents as needed |
-| **File-centered work** | ✗ | Possible, but not the center | Manual | ✓ Strong fit | Data loaders, not workspace files |
-| **MCP / external tools** | Via integrations | ✓ First-class option | Manual integration | Via tools/subagents | Via adapters/tools |
-| **Best fit** | Simple assistant or chain | Workflow automation with agent teams | Complex control flow | Open-ended execution | RAG, parsing, graph/data retrieval |
-| **Setup complexity** | Low | Medium | Medium | Low | Medium |
+| | LangChain | CrewAI | LangGraph | Deep Agents | LlamaIndex | Agno |
+|---|-----------|--------|-----------|-------------|------------|------|
+| **Primary strength** | Models, tools, chains | Flow-first automations | Orchestration and state | Long-running agent systems | Retrieval and data systems | Integrated agent/runtime stack |
+| **Control flow** | Fixed tool loop | Managed by flows | Custom graph | Managed by middleware | Moderate; retrieval-first plus agents/workflows | Agent/team/workflow surfaces |
+| **Built-in collaboration model** | Light | Crews and tasks | Manual | Subagents | Agent/workflow patterns | Teams |
+| **Planning** | ✗ | Optional crew planning | Manual | ✓ Built in | Limited; use workflows/agents as needed | Limited; use teams/workflows as needed |
+| **File-centered work** | ✗ | Possible, but not the center | Manual | ✓ Strong fit | Data loaders, not workspace files | Possible, but not the center |
+| **MCP / external tools** | Via integrations | ✓ First-class option | Manual integration | Via tools/subagents | Via adapters/tools | Via tool ecosystem and integrations |
+| **Best fit** | Simple assistant or chain | Workflow automation with agent teams | Complex control flow | Open-ended execution | RAG, parsing, graph/data retrieval | Agents that should grow into a managed runtime |
+| **Setup complexity** | Low | Medium | Medium | Low | Medium | Medium |

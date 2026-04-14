@@ -44,6 +44,7 @@ The framework is most effective when you keep these responsibilities separate in
 
 <ex-basic-index>
 <python>
+
 Build the canonical load-index-query flow.
 ```python
 from llama_index.core import Settings, SimpleDirectoryReader, VectorStoreIndex
@@ -60,6 +61,7 @@ query_engine = index.as_query_engine()
 response = query_engine.query("What is in these files?")
 print(response)
 ```
+
 </python>
 </ex-basic-index>
 
@@ -84,6 +86,7 @@ print(response)
 
 <ex-persist-index>
 <python>
+
 Persist a local index and reload it later.
 ```python
 from llama_index.core import StorageContext, load_index_from_storage
@@ -93,6 +96,7 @@ index.storage_context.persist(persist_dir="./storage")
 storage_context = StorageContext.from_defaults(persist_dir="./storage")
 restored_index = load_index_from_storage(storage_context)
 ```
+
 </python>
 </ex-persist-index>
 

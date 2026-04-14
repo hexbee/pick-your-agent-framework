@@ -39,6 +39,7 @@ Give every tool a clear name and a description that explains when it is useful. 
 
 <ex-function-agent>
 <python>
+
 Build a tool-calling agent with one regular tool and one retrieval tool.
 ```python
 from llama_index.core.agent.workflow import FunctionAgent
@@ -62,6 +63,7 @@ agent = FunctionAgent(
     system_prompt="Use tools whenever the answer depends on indexed data.",
 )
 ```
+
 </python>
 </ex-function-agent>
 

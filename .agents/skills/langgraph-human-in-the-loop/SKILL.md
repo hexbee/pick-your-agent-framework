@@ -32,6 +32,7 @@ Three things are required for interrupts to work:
 
 <ex-basic-interrupt-resume>
 <python>
+
 Pause execution for human review and resume with Command.
 ```python
 from langgraph.types import interrupt, Command
@@ -68,8 +69,10 @@ print(result["__interrupt__"])
 result = graph.invoke(Command(resume=True), config)
 print(result["approved"])  # True
 ```
+
 </python>
 <typescript>
+
 Pause execution for human review and resume with Command.
 ```typescript
 import { interrupt, Command, MemorySaver, StateGraph, StateSchema, START, END } from "@langchain/langgraph";
@@ -104,6 +107,7 @@ console.log(result.__interrupt__);
 result = await graph.invoke(new Command({ resume: true }), config);
 console.log(result.approved);  // true
 ```
+
 </typescript>
 </ex-basic-interrupt-resume>
 
@@ -115,6 +119,7 @@ A common pattern: interrupt to show a draft, then route based on the human's dec
 
 <ex-approval-workflow>
 <python>
+
 Interrupt for human review, then route to send or end based on the decision.
 ```python
 from langgraph.types import interrupt, Command
@@ -149,8 +154,10 @@ def human_review(state: EmailAgentState) -> Command[Literal["send_reply", "__end
         # Rejection — human will handle directly
         return Command(update={}, goto=END)
 ```
+
 </python>
 <typescript>
+
 Interrupt for human review, then route to send or end based on the decision.
 ```typescript
 import { interrupt, Command, END, GraphNode } from "@langchain/langgraph";
@@ -177,6 +184,7 @@ const humanReview: GraphNode<typeof EmailAgentState> = async (state) => {
   }
 };
 ```
+
 </typescript>
 </ex-approval-workflow>
 
@@ -188,6 +196,7 @@ Use `interrupt()` in a loop to validate human input and re-prompt if invalid.
 
 <ex-validation-loop>
 <python>
+
 Validate human input in a loop, re-prompting until valid.
 ```python
 from langgraph.types import interrupt
@@ -220,8 +229,10 @@ retry = graph.invoke(Command(resume="thirty"), config)
 final = graph.invoke(Command(resume=30), config)
 print(final["age"])  # 30
 ```
+
 </python>
 <typescript>
+
 Validate human input in a loop, re-prompting until valid.
 ```typescript
 import { interrupt } from "@langchain/langgraph";
@@ -242,6 +253,7 @@ const getAgeNode = (state: typeof State.State) => {
   }
 };
 ```
+
 </typescript>
 </ex-validation-loop>
 
@@ -253,6 +265,7 @@ When parallel branches each call `interrupt()`, resume all of them in a single i
 
 <ex-multiple-interrupts>
 <python>
+
 Resume multiple parallel interrupts by mapping interrupt IDs to values.
 ```python
 from typing import Annotated, TypedDict
@@ -297,8 +310,10 @@ resume_map = {
 result = graph.invoke(Command(resume=resume_map), config)
 # result["vals"] = ["a:answer for question_a", "b:answer for question_b"]
 ```
+
 </python>
 <typescript>
+
 Resume multiple parallel interrupts by mapping interrupt IDs to values.
 ```typescript
 import { Command, END, MemorySaver, START, StateGraph, interrupt, isInterrupted, INTERRUPT, Annotation } from "@langchain/langgraph";
@@ -345,6 +360,7 @@ if (isInterrupted(interruptedResult)) {
 const result = await graph.invoke(new Command({ resume: resumeMap }), config);
 // result.vals = ["a:answer for question_a", "b:answer for question_b"]
 ```
+
 </typescript>
 </ex-multiple-interrupts>
 
@@ -372,6 +388,7 @@ When the graph resumes, the node restarts from the **beginning** — ALL code be
 
 <ex-idempotent-patterns>
 <python>
+
 Idempotent operations before interrupt vs non-idempotent (wrong).
 ```python
 # GOOD: Upsert is idempotent — safe before interrupt
@@ -396,8 +413,10 @@ def node_a(state: State):
     approved = interrupt("Approve this change?")
     return {"approved": approved}
 ```
+
 </python>
 <typescript>
+
 Idempotent operations before interrupt vs non-idempotent (wrong).
 ```typescript
 // GOOD: Upsert is idempotent — safe before interrupt
@@ -426,6 +445,7 @@ const nodeA = async (state: typeof State.State) => {
   return { approved };
 };
 ```
+
 </typescript>
 </ex-idempotent-patterns>
 
@@ -436,6 +456,7 @@ const nodeA = async (state: typeof State.State) => {
 When a subgraph contains an `interrupt()`, resuming re-executes BOTH the parent node (that invoked the subgraph) AND the subgraph node (that called `interrupt()`):
 
 <python>
+
 ```python
 def node_in_parent_graph(state: State):
     some_code()  # <-- Re-executes on resume
@@ -447,8 +468,10 @@ def node_in_subgraph(state: State):
     result = interrupt("What's your name?")
     # ...
 ```
+
 </python>
 <typescript>
+
 ```typescript
 async function nodeInParentGraph(state: State) {
   someCode();  // <-- Re-executes on resume
@@ -462,6 +485,7 @@ async function nodeInSubgraph(state: State) {
   // ...
 }
 ```
+
 </typescript>
 </subgraph-interrupt-re-execution>
 
@@ -477,6 +501,7 @@ async function nodeInSubgraph(state: State) {
 
 <fix-checkpointer-required-for-interrupts>
 <python>
+
 Checkpointer required for interrupt functionality.
 ```python
 # WRONG
@@ -485,8 +510,10 @@ graph = builder.compile()
 # CORRECT
 graph = builder.compile(checkpointer=InMemorySaver())
 ```
+
 </python>
 <typescript>
+
 Checkpointer required for interrupt functionality.
 ```typescript
 // WRONG
@@ -495,11 +522,13 @@ const graph = builder.compile();
 // CORRECT
 const graph = builder.compile({ checkpointer: new MemorySaver() });
 ```
+
 </typescript>
 </fix-checkpointer-required-for-interrupts>
 
 <fix-resume-with-command>
 <python>
+
 Use Command to resume from an interrupt (regular dict restarts graph).
 ```python
 # WRONG
@@ -508,8 +537,10 @@ graph.invoke({"resume_data": "approve"}, config)
 # CORRECT
 graph.invoke(Command(resume="approve"), config)
 ```
+
 </python>
 <typescript>
+
 Use Command to resume from an interrupt (regular object restarts graph).
 ```typescript
 // WRONG
@@ -518,10 +549,12 @@ await graph.invoke({ resumeData: "approve" }, config);
 // CORRECT
 await graph.invoke(new Command({ resume: "approve" }), config);
 ```
+
 </typescript>
 </fix-resume-with-command>
 
 <boundaries>
+
 ### What You Should NOT Do
 
 - Use interrupts without a checkpointer — will fail
@@ -529,4 +562,5 @@ await graph.invoke(new Command({ resume: "approve" }), config);
 - Pass `Command(update=...)` as invoke input — graph appears stuck (use plain dict)
 - Perform non-idempotent side effects before `interrupt()` — creates duplicates on resume
 - Assume code before `interrupt()` only runs once — it re-runs every resume
+
 </boundaries>

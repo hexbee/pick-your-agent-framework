@@ -9,8 +9,16 @@
 ## Selection
 
 - `framework-selection`
+- `agno-selection`
 - `llamaindex-selection`
 - `crewai-selection`
+
+## Agno
+
+- `agno-fundamentals`
+- `agno-teams-workflows`
+- `agno-knowledge-memory`
+- `agno-agentos`
 
 ## LangChain
 

@@ -28,6 +28,7 @@ Use memory for evolving context. Use knowledge for reference material the system
 ## Memory in a Flow
 
 <python>
+
 ```python
 from crewai.flow.flow import Flow, listen, start
 
@@ -45,6 +46,7 @@ class ResearchFlow(Flow):
         context = "\n".join(f"- {m.record.content}" for m in past)
         return f"New findings: {findings}\nPrevious context:\n{context}"
 ```
+
 </python>
 
 ---
@@ -52,6 +54,7 @@ class ResearchFlow(Flow):
 ## Knowledge Sources
 
 <python>
+
 ```python
 from crewai import Agent, Crew, Process, Task
 from crewai.knowledge.source.string_knowledge_source import StringKnowledgeSource
@@ -83,6 +86,7 @@ result = crew.kickoff(
     inputs={"question": "Which city does John live in?"}
 )
 ```
+
 </python>
 
 ---
