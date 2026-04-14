@@ -31,6 +31,7 @@ The repository currently covers these framework families:
 | Framework | Best fit |
 |-----------|----------|
 | LangChain | model calls, tools, chains, simple agents, general building blocks |
+| Pydantic AI | typed Python agents, structured output, explicit tools/dependencies, observability, and durable execution |
 | Agno | integrated agents, teams, workflows, memory/knowledge, and runtime operations |
 | CrewAI | flow-first automations, role-based agent teams, tasks/processes, production workflows |
 | LangGraph | explicit orchestration, branching, loops, persistence, human-in-the-loop |
@@ -46,6 +47,7 @@ Start with this rough rule of thumb:
 | If the hardest part is... | Start here |
 |---------------------------|------------|
 | model/tool composition | LangChain |
+| typed Python agents with structured output and explicit tools | Pydantic AI |
 | one integrated agent/runtime stack | Agno |
 | flow-first automation with role-based agents | CrewAI |
 | orchestration and state transitions | LangGraph |
@@ -69,6 +71,11 @@ If the answer is "Agno", the next layer of routing lives here:
 
 - [agno-selection](./.agents/skills/agno-selection/SKILL.md)
 
+If the answer is "Pydantic AI", start here:
+
+- [pydanticai-dependencies](./.agents/skills/pydanticai-dependencies/SKILL.md) for package and provider setup
+- [pydanticai-fundamentals](./.agents/skills/pydanticai-fundamentals/SKILL.md) for the default build path
+
 ## What You Will Find Here
 
 This repository currently contains:
@@ -88,6 +95,7 @@ The skill suite is grouped into:
 - Agno skills
 - CrewAI skills
 - LangChain skills
+- Pydantic AI skills
 - LangGraph skills
 - Deep Agents skills
 - LlamaIndex skills
@@ -109,6 +117,7 @@ The repository is structured to separate reusable skills from future written doc
 │       ├── agno-*/
 │       ├── crewai-*/
 │       ├── langchain-*/
+│       ├── pydanticai-*/
 │       ├── langgraph-*/
 │       ├── deep-agents-*/
 │       └── llamaindex-*/
@@ -138,7 +147,7 @@ This repository is intentionally leaving room for:
 - more selection heuristics for real-world scenarios
 - more framework-specific skill suites
 
-Likely future additions could include frameworks such as AutoGen or PydanticAI, but the structure is meant to support any framework that deserves a serious introduction and comparison path.
+Likely future additions could include frameworks such as AutoGen, but the structure is meant to support any framework that deserves a serious introduction and comparison path.
 
 ## How to Extend It
 

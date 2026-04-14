@@ -1,0 +1,4 @@
+interface:
+  display_name: "Pydantic AI Fundamentals"
+  short_description: "Core Agent setup, typed output, and first patterns"
+  default_prompt: "Use $pydanticai-fundamentals to build or explain a basic Pydantic AI agent."

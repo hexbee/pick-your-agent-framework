@@ -1,0 +1,4 @@
+interface:
+  display_name: "Pydantic AI Production"
+  short_description: "Logfire, evals, durable execution, and reliability"
+  default_prompt: "Use $pydanticai-production for Pydantic AI tracing, evals, durable execution, or production debugging."

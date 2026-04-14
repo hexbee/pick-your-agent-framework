@@ -7,6 +7,7 @@ Use this file when a request could reasonably fit more than one framework.
 Pick the framework for the hardest part of the system right now:
 
 - choose **LangChain** when the task is mostly model calls, prompt composition, tools, or a simple agent loop
+- choose **Pydantic AI** when the task is mostly building a typed Python agent service with explicit tools, dependency injection, structured output, or production-friendly tracing/evals
 - choose **CrewAI** when the task is mostly flow-first automation, role-based agent teamwork, and bounded crews inside a broader Python workflow
 - choose **LangGraph** when the task is mostly orchestration, branching, loops, or state transitions
 - choose **Deep Agents** when the task is mostly long-running execution, planning, files, memory, and delegation
@@ -18,6 +19,7 @@ Pick the framework for the hardest part of the system right now:
 | Request shape | Start here | Then |
 |---------------|------------|------|
 | "Build a simple assistant with tools" | `LangChain` | add `LangGraph` only if control flow grows |
+| "Build a typed Python agent with validated outputs and explicit tools" | `Pydantic AI` | add `LlamaIndex` only if retrieval becomes the hard backend |
 | "Build a flow-first business automation with role-based agents" | `CrewAI` | use `crewai-flows`, then add crews for complex steps |
 | "Build a retrying or branching agent" | `LangGraph` | add `LangChain` primitives inside nodes |
 | "Build a long-running coding/research worker" | `Deep Agents` | add `LangGraph` for precise subflows if needed |
@@ -39,6 +41,16 @@ Good fit:
 
 - simple agents that need stronger RAG
 - existing LangChain codebases adding document retrieval
+
+### Pydantic AI + LlamaIndex
+
+Use this when Pydantic AI is the typed Python application shell, but LlamaIndex is the better retrieval backend.
+
+Good fit:
+
+- typed service responses grounded in private docs
+- agent apps where retrieval quality is more important than changing the agent surface
+- Python backends that want Pydantic AI ergonomics plus a stronger data layer
 
 ### LangGraph + LlamaIndex
 
@@ -82,6 +94,7 @@ Good fit:
 Start with one primary framework. Add a second only when a real boundary appears:
 
 - retrieval is weak -> add `LlamaIndex`
+- typed Python agent ergonomics matter most -> choose `Pydantic AI`
 - workflow should be flow-first and role-based -> add `CrewAI`
 - app should unify build and runtime concerns -> add `Agno`
 - orchestration is messy -> add `LangGraph`

@@ -11,6 +11,7 @@ Use it when you know roughly what you want to build, but you are not yet sure wh
 | If the hardest part is... | Start here |
 |---------------------------|------------|
 | model and tool composition | LangChain |
+| typed Python agents with validated output and explicit tools | Pydantic AI |
 | one integrated agent stack plus runtime operations | Agno |
 | flow-first business automation with role-based agents | CrewAI |
 | orchestration, loops, and state | LangGraph |
@@ -24,6 +25,13 @@ Use it when you know roughly what you want to build, but you are not yet sure wh
 - you want a simple assistant or agent
 - you mostly need models, prompts, and tools
 - you do not yet need custom graph orchestration
+
+### Use Pydantic AI when
+
+- you are building a Python-first agent service
+- typed output and validation are first-class requirements
+- request-scoped dependencies should be explicit in the app design
+- tracing, evals, or durable execution matter, but graph orchestration is not the main challenge
 
 ### Use Agno when
 
@@ -62,6 +70,10 @@ Use it when you know roughly what you want to build, but you are not yet sure wh
 
 Use this when custom orchestration sits on top of a strong retrieval layer.
 
+### Pydantic AI + LlamaIndex
+
+Use this when Pydantic AI is the typed Python application shell, but retrieval and private-data access deserve a stronger dedicated data layer.
+
 ### CrewAI + LlamaIndex
 
 Use this when CrewAI is the application shell, but document retrieval or private-data grounding deserves a stronger dedicated data layer.
@@ -81,6 +93,7 @@ Use this when Agno should stay the application and runtime shell, but retrieval 
 ## Common Mis-Selections
 
 - choosing LangChain when the real problem is document retrieval quality
+- choosing LangChain when Pydantic AI would better fit a typed Python service with explicit tools
 - choosing Agno when one lightweight agent would already solve the problem
 - choosing CrewAI when one simple tool-calling agent would be enough
 - choosing LangGraph when CrewAI's flow model would already cover the workflow cleanly
@@ -91,6 +104,7 @@ Use this when Agno should stay the application and runtime shell, but retrieval 
 ## Suggested Reading Order
 
 - Read [LangChain](../frameworks/langchain.md)
+- Read [Pydantic AI](../frameworks/pydanticai.md)
 - Read [Agno](../frameworks/agno.md)
 - Read [CrewAI](../frameworks/crewai.md)
 - Read [LangGraph](../frameworks/langgraph.md)
@@ -116,3 +130,8 @@ If the first answer is CrewAI, continue here:
 If the first answer is Agno, continue here:
 
 - [agno-selection](../../.agents/skills/agno-selection/SKILL.md)
+
+If the first answer is Pydantic AI, continue here:
+
+- [pydanticai-dependencies](../../.agents/skills/pydanticai-dependencies/SKILL.md) for package and provider setup
+- [pydanticai-fundamentals](../../.agents/skills/pydanticai-fundamentals/SKILL.md) for the default build path

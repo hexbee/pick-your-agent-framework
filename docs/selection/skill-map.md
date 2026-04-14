@@ -27,6 +27,13 @@ Use it as the canonical place to update the skill list when new framework famili
 - `langchain-middleware`
 - `langchain-rag`
 
+## Pydantic AI
+
+- `pydanticai-dependencies`
+- `pydanticai-fundamentals`
+- `pydanticai-tools-mcp`
+- `pydanticai-production`
+
 ## LangGraph
 
 - `langgraph-fundamentals`

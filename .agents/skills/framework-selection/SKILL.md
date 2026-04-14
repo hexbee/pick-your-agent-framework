@@ -1,10 +1,10 @@
 ---
 name: framework-selection
-description: "INVOKE THIS SKILL at the START of any LangChain, LangGraph, Deep Agents, CrewAI, LlamaIndex, or Agno project, before writing agent code. Determines which framework is the right starting point and routes to the correct next skill."
+description: "INVOKE THIS SKILL at the START of any LangChain, Pydantic AI, LangGraph, Deep Agents, CrewAI, LlamaIndex, or Agno project, before writing agent code. Determines which framework is the right starting point and routes to the correct next skill."
 ---
 
 <overview>
-LangChain, LangGraph, and Deep Agents are **layered**, while CrewAI, LlamaIndex, and Agno are complementary frameworks with different centers of gravity:
+LangChain, LangGraph, and Deep Agents are **layered**, while Pydantic AI, CrewAI, LlamaIndex, and Agno are complementary frameworks with different centers of gravity:
 
 ```
 ┌─────────────────────────────────────────────┐
@@ -21,6 +21,12 @@ LangChain, LangGraph, and Deep Agents are **layered**, while CrewAI, LlamaIndex,
 ┌─────────────────────────────────────────────┐
 │                   CrewAI                    │  ← flow-first multi-agent automation
 │   (flows, crews, tasks, tools, MCP, ops)   │
+└─────────────────────────────────────────────┘
+
+┌─────────────────────────────────────────────┐
+│                Pydantic AI                  │  ← typed Python agent framework
+│ (typed output, tools, deps, MCP, evals,    │
+│   observability, durable execution)        │
 └─────────────────────────────────────────────┘
 
 ┌─────────────────────────────────────────────┐
@@ -55,6 +61,7 @@ Answer these questions in order:
 | Is the main problem building retrieval, indexing, document parsing, graph retrieval, or question-answering over private data? | **LlamaIndex** | ↓ |
 | Is the app best served by one integrated framework spanning agents, teams, workflows, persistence, and a runtime/control-plane layer? | **Agno** | ↓ |
 | Is the app best described as flow-first automation with role-based agents, explicit tasks, and crews inside a broader Python workflow? | **CrewAI** | ↓ |
+| Is the app best described as a typed Python agent service with explicit tools, dependency injection, structured output, and production tracing/evals without graph-first orchestration? | **Pydantic AI** | ↓ |
 | Does the task require complex control flow such as loops, dynamic branching, parallel workers, human-in-the-loop, or custom state? | **LangGraph** | ↓ |
 | Is this a single-purpose agent that takes input, runs tools, and returns a result? | **LangChain** (`create_agent`) | ↓ |
 | Is this a pure model call, chain, or retrieval pipeline with no agent loop? | **LangChain** (chain) | — |
@@ -79,6 +86,21 @@ Answer these questions in order:
 - control flow is conditional or iterative
 
 **Skills to invoke next:** `langchain-dependencies`, `langchain-fundamentals`, `langchain-middleware`, `langchain-rag`
+
+### Pydantic AI — Use when you want typed Python agents with explicit boundaries
+
+**Best for:**
+- Python-first agent services with structured or validated outputs
+- tool-driven apps that benefit from dependency injection and request-scoped context
+- production-oriented systems that want tracing, evals, and durable execution without starting from a graph model
+- teams that like a FastAPI-style developer experience for agent code
+
+**Not ideal when:**
+- graph orchestration, branching, or state machines are the real hard problem
+- the main problem is retrieval architecture rather than agent/service ergonomics
+- the application is primarily a flow/task/crew system
+
+**Skills to invoke next:** `pydanticai-dependencies`, `pydanticai-fundamentals`, `pydanticai-tools-mcp`, `pydanticai-production`
 
 ### CrewAI — Use when the app should be flow-first and role-based
 
@@ -170,6 +192,15 @@ Answer these questions in order:
 
 When uncertain, invoke `crewai-selection` first and let it route within the CrewAI subtree.
 
+### If the answer is Pydantic AI
+
+| If the main Pydantic AI question is... | Go To |
+|----------------------------------------|-------|
+| package setup, extras, or providers | `pydanticai-dependencies` |
+| first agent, output types, or message history | `pydanticai-fundamentals` |
+| tools, `RunContext`, toolsets, or MCP | `pydanticai-tools-mcp` |
+| tracing, evals, durable execution, or multi-agent reliability | `pydanticai-production` |
+
 ### If the answer is Agno
 
 | If the main Agno question is... | Go To |
@@ -205,6 +236,7 @@ These frameworks can be combined, but only after a primary framework has been ch
 | Scenario | Recommended pattern |
 |----------|---------------------|
 | Main system needs planning + memory, but one subtask requires graph control | Deep Agents orchestrator -> LangGraph subagent |
+| Typed Python agent shell needs stronger private-data retrieval | Pydantic AI + LlamaIndex |
 | App shell is flow-first, but retrieval over private docs is the real data challenge | CrewAI + LlamaIndex |
 | Simple app shell, but retrieval still deserves a dedicated layer | LangChain + LlamaIndex |
 | Custom orchestration sits on top of a serious retrieval backend | LangGraph + LlamaIndex |
@@ -216,13 +248,13 @@ Start with one framework. Add a second only when a real boundary appears.
 
 ## Quick Reference
 
-| | LangChain | CrewAI | LangGraph | Deep Agents | LlamaIndex | Agno |
-|---|-----------|--------|-----------|-------------|------------|------|
-| **Primary strength** | Models, tools, chains | Flow-first automations | Orchestration and state | Long-running agent systems | Retrieval and data systems | Integrated agent/runtime stack |
-| **Control flow** | Fixed tool loop | Managed by flows | Custom graph | Managed by middleware | Moderate; retrieval-first plus agents/workflows | Agent/team/workflow surfaces |
-| **Built-in collaboration model** | Light | Crews and tasks | Manual | Subagents | Agent/workflow patterns | Teams |
-| **Planning** | ✗ | Optional crew planning | Manual | ✓ Built in | Limited; use workflows/agents as needed | Limited; use teams/workflows as needed |
-| **File-centered work** | ✗ | Possible, but not the center | Manual | ✓ Strong fit | Data loaders, not workspace files | Possible, but not the center |
-| **MCP / external tools** | Via integrations | ✓ First-class option | Manual integration | Via tools/subagents | Via adapters/tools | Via tool ecosystem and integrations |
-| **Best fit** | Simple assistant or chain | Workflow automation with agent teams | Complex control flow | Open-ended execution | RAG, parsing, graph/data retrieval | Agents that should grow into a managed runtime |
-| **Setup complexity** | Low | Medium | Medium | Low | Medium | Medium |
+| | LangChain | Pydantic AI | CrewAI | LangGraph | Deep Agents | LlamaIndex | Agno |
+|---|-----------|-------------|--------|-----------|-------------|------------|------|
+| **Primary strength** | Models, tools, chains | Typed Python agents | Flow-first automations | Orchestration and state | Long-running agent systems | Retrieval and data systems | Integrated agent/runtime stack |
+| **Control flow** | Fixed tool loop | Agent loop with typed boundaries | Managed by flows | Custom graph | Managed by middleware | Moderate; retrieval-first plus agents/workflows | Agent/team/workflow surfaces |
+| **Built-in collaboration model** | Light | Light; multi-agent patterns available | Crews and tasks | Manual | Subagents | Agent/workflow patterns | Teams |
+| **Planning** | ✗ | ✗ | Optional crew planning | Manual | ✓ Built in | Limited; use workflows/agents as needed | Limited; use teams/workflows as needed |
+| **File-centered work** | ✗ | Possible, but not the center | Possible, but not the center | Manual | ✓ Strong fit | Data loaders, not workspace files | Possible, but not the center |
+| **MCP / external tools** | Via integrations | ✓ First-class via tools, toolsets, and MCP | ✓ First-class option | Manual integration | Via tools/subagents | Via adapters/tools | Via tool ecosystem and integrations |
+| **Best fit** | Simple assistant or chain | Typed Python agent service | Workflow automation with agent teams | Complex control flow | Open-ended execution | RAG, parsing, graph/data retrieval | Agents that should grow into a managed runtime |
+| **Setup complexity** | Low | Low-Medium | Medium | Medium | Low | Medium | Medium |

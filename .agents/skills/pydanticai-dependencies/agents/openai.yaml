@@ -1,0 +1,4 @@
+interface:
+  display_name: "Pydantic AI Dependencies"
+  short_description: "Install, package, and provider setup guidance"
+  default_prompt: "Use $pydanticai-dependencies to choose Pydantic AI packages, extras, and environment setup."

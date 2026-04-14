@@ -1,0 +1,4 @@
+interface:
+  display_name: "Pydantic AI Tools and MCP"
+  short_description: "Function tools, deps injection, toolsets, and MCP"
+  default_prompt: "Use $pydanticai-tools-mcp for Pydantic AI tools, RunContext, toolsets, or MCP integration."

@@ -27,6 +27,13 @@
 - `langchain-middleware`
 - `langchain-rag`
 
+## Pydantic AI
+
+- `pydanticai-dependencies`
+- `pydanticai-fundamentals`
+- `pydanticai-tools-mcp`
+- `pydanticai-production`
+
 ## LangGraph
 
 - `langgraph-fundamentals`
